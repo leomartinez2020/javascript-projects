@@ -1,0 +1,42 @@
+{% extends 'miapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% if colegio %}
+        <h1 class="text-center">{{colegio.nombre}}</h1>
+        <div class="table-responsive">
+	<table class="table">
+		<tr>
+			<th>Nombre</th>
+			<th>Ciudad</th>
+			<th>Evaluados</th>
+			<th>Naturaleza</th>
+			<th>Calendario</th>
+                        <th>Jornada</th>
+		</tr>
+		<tr>
+			<td>{{colegio.nombre}}</td>
+			<td>{{colegio.municipio}}</td>
+			<td>{{colegio.evaluados}}</td>
+			<td>{{colegio.naturaleza}}</td>
+			<td>{{colegio.calendario}}</td>
+                        <td>{{colegio.jornada}}</td>
+		</tr>
+	</table>
+        </div> <!-- end table responsive -->
+{% endif %}
+<div id="grafica"></div>
+{% if mensaje %}<h3>{{mensaje}}</h3>{% endif %}
+<form action="" method='POST'>
+	{% csrf_token %}
+	{{form.as_p}}
+	<button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+<script>
+	var dotado = {{data | safe}};
+	if (dotado != 0) {
+		var data = dotado[0].fields;
+	}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="{% static 'js/visor.js' %}"></script>
+{% endblock %}

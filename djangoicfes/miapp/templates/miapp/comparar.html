@@ -1,0 +1,26 @@
+{% extends 'miapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% if colegio %}
+        <h3 class="text-center"><span style="color: white; background: #a3a3ff">{{colegio.nombre | lower}}</span> <br><span style="color: white; background: #00bb00">{{school.nombre | lower}}</span></h3>
+{% endif %}
+<div id="grafica"></div><hr>
+{% if mensaje %}<p>{{mensaje}}</p>{% endif %}
+<form action="" method='POST'>
+	{% csrf_token %}
+	{{form.as_p}}
+	<button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+</div>
+<script>
+	var dotado1 = {{data1 | safe}};
+	var dotado2 = {{data2 | safe}};
+	if (dotado1 != 0 && dotado2 != 0) {
+		var data = dotado1[0].fields;
+		var gata = dotado2[0].fields;
+	}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="{% static 'js/compara.js' %}"></script>
+{% endblock %}
+

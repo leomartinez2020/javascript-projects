@@ -1,0 +1,9 @@
+{% extends 'miapp/base.html' %}
+{% block content %}
+<h2>Resultados de la busqueda</h2>
+<ul>
+	{% for elem in col %}
+	<li><a href="{% url 'detalle' elem.slug elem.pk%}">{{elem}} ({{elem.municipio}})</a></li>
+	{% endfor %}
+</ul>
+{% endblock %}
