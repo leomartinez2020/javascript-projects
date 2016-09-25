@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+<body ng-app="myApp">
+  <div class="container">
+    <div class="jumbotron blanco text-center">
+    <img src="/sandra.png" alt="sandra luz" class="img-rounded">
+    <h2>Cotización de las principales empresas en Wall Street</h2>
+    </div>
+    <div ng-controller="miCtrl">
+      <p>Filtrar por nombre: <input type="text" ng-model="Name"></p>
+      <table class="table">
+        <tr>
+          <th>Nombre</th>
+          <th>Símbolo</th>
+          <th>Fecha</th>
+          <th>Moneda</th>
+          <th>Volumen</th>
+          <th>Oferta</th>
+          <th>EBITDA</th>
+          <th>Valor en Libro</th>
+        </tr>
+        <tr ng-repeat="valor in cosas | filter: Name">
+          <td>{{valor.Name}}</td>
+          <td>{{valor.Symbol}}</td>
+          <td>{{valor.LastTradeDate}}</td>
+          <td>{{valor.Currency}}</td>
+          <td>{{valor.Volume}}</td>
+          <td>{{valor.Bid}}</td>
+          <td>{{valor.EBITDA}}</td>
+          <td>{{valor.BookValue}}</td>
+        </tr>
+      </table>
+    </div>
+  </div> <!--end of container-->
+  <% include ../partials/footer.ejs %>
+</body>
+</html>
