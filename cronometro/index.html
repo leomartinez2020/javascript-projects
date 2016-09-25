@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700|Open+Sans:700,400,300' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+    <title>Cronómetro</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js" > </script>
+    <script type="text/javascript" src="js/touch.js" ></script>
+    <script type="text/javascript">
+      $(function(){
+        localStorage.c = (localStorage.c || "0.0");
+        localStorage.pausas=(localStorage.pausas||"")
+
+        var t, cl = $("#crono");
+        var p=$("#paradas");
+        var s=$("pantalla");
+
+        function incr()     { localStorage.c = +localStorage.c + 0.1; }
+        function mostrar()  { cl.html((+localStorage.c).toFixed(1));};
+        function arrancar() { t=setInterval(function(){incr(); mostrar()}, 100);};
+        function parar()    { localStorage.pausas+=(+localStorage.c).toFixed(1)+" segundos<br>"; pausar(); clearInterval(t); t=undefined;};
+        function cambiar()  { if (!t) arrancar(); else parar(); };
+        function pausar()   { p.html(localStorage.pausas);};
+
+        $("#cambiar").on('click', cambiar);
+        s.on('tap', cambiar);
+        s.on('swipe', function(){ if (t===undefined){ localStorage.c="0.0"; localStorage.pausas=""; pausar(); mostrar();}});
+        $("#inicializar").on('click', function(){ if (t===undefined){ localStorage.c="0.0"; localStorage.pausas=""; pausar(); mostrar();}});
+        mostrar();
+        pausar();
+      });
+    </script>
+  </head>
+  <body id="pantalla">
+    <h1>Cronómetro</h1>
+      <h3><span id="crono"> 0.0 </span> segundos </h3>
+      <button type="button" id="cambiar"> arrancar/parar </button>
+      <button type="button" id="inicializar">  reiniciar </button><br>
+    <h3>Pausas realizadas:</h3>
+    <h2 id="paradas"></h2>
+  </body>
+</html>

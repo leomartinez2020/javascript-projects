@@ -1,0 +1,13 @@
+{
+  "name": "Cronometro",
+  "description": "Registra las paradas del reloj",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Leonardo Martinez",
+    "url": "http://leonardo384.github.io/"
+  },
+  "default_locale": "es"
+}
